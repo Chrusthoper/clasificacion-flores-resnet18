@@ -1,0 +1,11 @@
+# Bibliotecas registradas en las ejecuciones de Arquitectura.
+# GPU final: Python 3.13.16, torch 2.14.1+cu130, torchvision 0.29.1+cu130.
+# CPU histórico: Python 3.13.18, torch 2.14.1+cpu, torchvision 0.29.1+cpu.
+# Las líneas siguientes registran versiones base; no seleccionan el índice CUDA/CPU.
+# En Colab GPU, el notebook registra las versiones y comprueba CUDA antes de entrenar.
+torch==2.14.1
+torchvision==0.29.1
+numpy==2.4.6
+matplotlib==3.10.0
+pandas==2.2.3
+scikit-learn==1.6.1

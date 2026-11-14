@@ -1,7 +1,5 @@
 __pycache__/
 .ipynb_checkpoints/
+.DS_Store
 datos/
-*.pth
-*.pt
-.venv/
-venv/
+*.zip
