@@ -1,0 +1,2 @@
+experimento,semilla,epocas,learning_rate,batch_size,fine_tuning,optimizador,dispositivo,parametros_entrenables,mejor_epoca,mejor_val_acc,mejor_val_loss,tiempo_segundos
+EXP-01,42,10,0.001,32,False,Adam,mps,52326,10,0.8343137254901961,1.1090513839441187,114.4637812920264
