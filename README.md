@@ -9,12 +9,12 @@ nuevas: la comparación de experimentos y la evaluación final.
 
 ## Qué aporta cada rama
 
-| Rama | Aporte | Dónde queda |
-|---|---|---|
-| `Datos` | Exploración del dataset, respuestas de las secciones 1 y 2, pruebas de semilla y tamaño de lote en CPU | `05_flores_datos.ipynb` |
-| `Arquitectura` | Auditoría de la red, seis configuraciones entrenadas en GPU, selección por validación, evaluación final, matriz, métricas por clase y checkpoint | `notebooks/`, `modelo/`, `evidencias/`, `docs/` |
-| `Entrenamiento_y_experimentos` | No tenía commits propios: apuntaba al mismo commit base que `main`. Su contenido (la comparación de experimentos) vive en la rama `Arquitectura` y se integra en la sección 9 del notebook final | sección 9 de `05_flores_final.ipynb` |
-| `Evaluación_demostración` | Ruta de evaluación y demo: matriz de confusión, errores comentados, guardado con metadatos, recarga estricta e inferencia Top-3 | sección 10 de `05_flores_final.ipynb` |
+| Rama | Persona | Aporte | Dónde queda |
+|---|---|---|---|
+| `Datos` | Laura (1) | Exploración del dataset, respuestas de las secciones 1 y 2, pruebas de semilla y tamaño de lote en CPU | `05_flores_datos.ipynb` |
+| `Arquitectura` | Migue (2) | Auditoría de la red, seis configuraciones entrenadas en GPU, selección por validación, evaluación final, matriz, métricas por clase y checkpoint | `notebooks/`, `modelo/`, `evidencias/`, `docs/` |
+| `Entrenamiento_y_experimentos` | Emi (3) | No tenía commits propios: apuntaba al mismo commit base que `main`. Su contenido (la comparación de experimentos) vive en la rama `Arquitectura` y se integra en la sección 9 del notebook final | sección 9 de `05_flores_final.ipynb` |
+| `Evaluación_demostración` | Chris (4) | Ruta de evaluación y demo: matriz de confusión, errores comentados, guardado con metadatos, recarga estricta e inferencia Top-3 | sección 10 de `05_flores_final.ipynb` |
 
 ## Configuración final
 
