@@ -1,0 +1,314 @@
+[
+  {
+    "id": "B0",
+    "seed": 42,
+    "batch_size": 32,
+    "lr": 0.001,
+    "epochs": 5,
+    "finetune_layer4": false,
+    "best_val_acc": 0.7568627450980392,
+    "best_val_loss": 1.7358950039919685,
+    "best_epoch": 5,
+    "seconds": 65.28729149200001,
+    "trainable": 52326,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 4.565323994206447,
+        "val_loss": 3.860703472997628,
+        "val_acc": 0.22450980392156863
+      },
+      {
+        "epoch": 2,
+        "train_loss": 3.2868907975215538,
+        "val_loss": 2.9891988053041345,
+        "val_acc": 0.5323529411764706
+      },
+      {
+        "epoch": 3,
+        "train_loss": 2.386418627757652,
+        "val_loss": 2.423987663493437,
+        "val_acc": 0.6421568627450981
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.7973185791688806,
+        "val_loss": 2.0153583124572156,
+        "val_acc": 0.7333333333333333
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.374692255375432,
+        "val_loss": 1.7358950039919685,
+        "val_acc": 0.7568627450980392
+      }
+    ],
+    "checkpoint_origen_colab": "/content/flowers102_reentrenamiento_independiente/checkpoints/B0_best.pth",
+    "checkpoint_final_exportado": null
+  },
+  {
+    "id": "E1_SEMILLA",
+    "seed": 7,
+    "batch_size": 32,
+    "lr": 0.001,
+    "epochs": 5,
+    "finetune_layer4": false,
+    "best_val_acc": 0.7637254901960784,
+    "best_val_loss": 1.701621143023173,
+    "best_epoch": 5,
+    "seconds": 62.90751953899996,
+    "trainable": 52326,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 4.482662945167691,
+        "val_loss": 3.778636640660903,
+        "val_acc": 0.24019607843137256
+      },
+      {
+        "epoch": 2,
+        "train_loss": 3.2136213050169102,
+        "val_loss": 2.929374241361431,
+        "val_acc": 0.5058823529411764
+      },
+      {
+        "epoch": 3,
+        "train_loss": 2.341357075466829,
+        "val_loss": 2.348454023809994,
+        "val_acc": 0.6803921568627451
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.7347758522220686,
+        "val_loss": 1.9587499422185561,
+        "val_acc": 0.7470588235294118
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.3276060137094237,
+        "val_loss": 1.701621143023173,
+        "val_acc": 0.7637254901960784
+      }
+    ],
+    "checkpoint_origen_colab": "/content/flowers102_reentrenamiento_independiente/checkpoints/E1_SEMILLA_best.pth",
+    "checkpoint_final_exportado": null
+  },
+  {
+    "id": "E2_LOTE",
+    "seed": 42,
+    "batch_size": 64,
+    "lr": 0.001,
+    "epochs": 5,
+    "finetune_layer4": false,
+    "best_val_acc": 0.734313725490196,
+    "best_val_loss": 2.2156302854126575,
+    "best_epoch": 5,
+    "seconds": 60.632514818999994,
+    "trainable": 52326,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 4.6354080443288765,
+        "val_loss": 4.0957081187005135,
+        "val_acc": 0.15490196078431373
+      },
+      {
+        "epoch": 2,
+        "train_loss": 3.720603863398234,
+        "val_loss": 3.4605553879457362,
+        "val_acc": 0.4470588235294118
+      },
+      {
+        "epoch": 3,
+        "train_loss": 3.005555849449307,
+        "val_loss": 2.9436190923055015,
+        "val_acc": 0.6039215686274509
+      },
+      {
+        "epoch": 4,
+        "train_loss": 2.4211026107563693,
+        "val_loss": 2.5361246277304255,
+        "val_acc": 0.6892156862745098
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.9799031033235437,
+        "val_loss": 2.2156302854126575,
+        "val_acc": 0.734313725490196
+      }
+    ],
+    "checkpoint_origen_colab": "/content/flowers102_reentrenamiento_independiente/checkpoints/E2_LOTE_best.pth",
+    "checkpoint_final_exportado": null
+  },
+  {
+    "id": "E3_LR",
+    "seed": 42,
+    "batch_size": 32,
+    "lr": 0.0001,
+    "epochs": 5,
+    "finetune_layer4": false,
+    "best_val_acc": 0.18333333333333332,
+    "best_val_loss": 4.133410610872157,
+    "best_epoch": 5,
+    "seconds": 63.619260217999965,
+    "trainable": 52326,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 4.76980900109983,
+        "val_loss": 4.6297732895495844,
+        "val_acc": 0.020588235294117647
+      },
+      {
+        "epoch": 2,
+        "train_loss": 4.5524252685846065,
+        "val_loss": 4.48070899738985,
+        "val_acc": 0.047058823529411764
+      },
+      {
+        "epoch": 3,
+        "train_loss": 4.397189237557206,
+        "val_loss": 4.357707545336555,
+        "val_acc": 0.07156862745098039
+      },
+      {
+        "epoch": 4,
+        "train_loss": 4.255082369785683,
+        "val_loss": 4.243696612937778,
+        "val_acc": 0.1284313725490196
+      },
+      {
+        "epoch": 5,
+        "train_loss": 4.120721055947098,
+        "val_loss": 4.133410610872157,
+        "val_acc": 0.18333333333333332
+      }
+    ],
+    "checkpoint_origen_colab": "/content/flowers102_reentrenamiento_independiente/checkpoints/E3_LR_best.pth",
+    "checkpoint_final_exportado": null
+  },
+  {
+    "id": "E4_EPOCAS",
+    "seed": 42,
+    "batch_size": 32,
+    "lr": 0.001,
+    "epochs": 10,
+    "finetune_layer4": false,
+    "best_val_acc": 0.8343137254901961,
+    "best_val_loss": 1.1090454477889866,
+    "best_epoch": 10,
+    "seconds": 128.24242383700005,
+    "trainable": 52326,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 4.565323994206447,
+        "val_loss": 3.860703472997628,
+        "val_acc": 0.22450980392156863
+      },
+      {
+        "epoch": 2,
+        "train_loss": 3.2868907975215538,
+        "val_loss": 2.9891988053041345,
+        "val_acc": 0.5323529411764706
+      },
+      {
+        "epoch": 3,
+        "train_loss": 2.386418627757652,
+        "val_loss": 2.423987663493437,
+        "val_acc": 0.6421568627450981
+      },
+      {
+        "epoch": 4,
+        "train_loss": 1.7973185791688806,
+        "val_loss": 2.0153583124572156,
+        "val_acc": 0.7333333333333333
+      },
+      {
+        "epoch": 5,
+        "train_loss": 1.374692255375432,
+        "val_loss": 1.7358950039919685,
+        "val_acc": 0.7568627450980392
+      },
+      {
+        "epoch": 6,
+        "train_loss": 1.082532597990597,
+        "val_loss": 1.5301402213526707,
+        "val_acc": 0.7862745098039216
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.8690700049493827,
+        "val_loss": 1.3833583827112235,
+        "val_acc": 0.8166666666666667
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.7161908993534013,
+        "val_loss": 1.2641477164100199,
+        "val_acc": 0.8205882352941176
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.6032396674156189,
+        "val_loss": 1.183257332502627,
+        "val_acc": 0.8156862745098039
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.510718787651436,
+        "val_loss": 1.1090454477889866,
+        "val_acc": 0.8343137254901961
+      }
+    ],
+    "checkpoint_origen_colab": "/content/flowers102_reentrenamiento_independiente/checkpoints/E4_EPOCAS_best.pth",
+    "checkpoint_final_exportado": null
+  },
+  {
+    "id": "E5_LAYER4",
+    "seed": 42,
+    "batch_size": 32,
+    "lr": 0.001,
+    "epochs": 5,
+    "finetune_layer4": true,
+    "best_val_acc": 0.9196078431372549,
+    "best_val_loss": 0.4630908444815991,
+    "best_epoch": 5,
+    "seconds": 63.842587450999986,
+    "trainable": 8446054,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 3.053176408188016,
+        "val_loss": 1.3491389822726156,
+        "val_acc": 0.6450980392156863
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.5488489638356602,
+        "val_loss": 0.7812534469015459,
+        "val_acc": 0.8480392156862745
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.0858923429367589,
+        "val_loss": 0.6069884404247883,
+        "val_acc": 0.8745098039215686
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.024208875183089108,
+        "val_loss": 0.4988352560529522,
+        "val_acc": 0.907843137254902
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.010524961589744279,
+        "val_loss": 0.4630908444815991,
+        "val_acc": 0.9196078431372549
+      }
+    ],
+    "checkpoint_origen_colab": "/content/flowers102_reentrenamiento_independiente/checkpoints/E5_LAYER4_best.pth",
+    "checkpoint_final_exportado": "modelo/modelo_entrenado.pth"
+  }
+]

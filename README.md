@@ -1,38 +1,49 @@
-# Evaluación y demostración (Persona 4)
+# Clasificación de flores con ResNet18 — entrega final
 
-Rama de la parte de evaluación del proyecto de clasificación de flores con ResNet18. El
-notebook `05_flores.ipynb` está ejecutado y trae, además de las ocho secciones respondidas,
-una sección 9 con la ruta completa de evaluación y demo: matriz de confusión, métricas por
-clase, tres errores comentados, guardado con metadatos, recarga estricta e inferencia Top-3.
+Proyecto 5 de Deep Learning: adaptar ResNet18 preentrenada para clasificar las 102 clases de
+Oxford Flowers 102 con transferencia de aprendizaje.
 
-## Dependencia con los experimentos
+Esta rama reúne el trabajo de las cuatro ramas del equipo en un solo notebook,
+`05_flores_final.ipynb`, ejecutado y con las ocho secciones respondidas más dos secciones
+nuevas: la comparación de experimentos y la evaluación final.
 
-La evaluación final se calcula con la configuración que gane en validación, así que esta
-parte depende de Persona 3. Para no quedarse esperando, la sección 9 tiene un interruptor:
+## Qué aporta cada rama
 
-```python
-CONFIG = 'base'   # 'base' mientras se espera; 'final' cuando se decida
-```
+| Rama | Aporte | Dónde queda |
+|---|---|---|
+| `Datos` | Exploración del dataset, respuestas de las secciones 1 y 2, pruebas de semilla y tamaño de lote en CPU | `05_flores_datos.ipynb` |
+| `Arquitectura` | Auditoría de la red, seis configuraciones entrenadas en GPU, selección por validación, evaluación final, matriz, métricas por clase y checkpoint | `notebooks/`, `modelo/`, `evidencias/`, `docs/` |
+| `Entrenamiento_y_experimentos` | No tenía commits propios: apuntaba al mismo commit base que `main`. Su contenido (la comparación de experimentos) vive en la rama `Arquitectura` y se integra en la sección 9 del notebook final | sección 9 de `05_flores_final.ipynb` |
+| `Evaluación_demostración` | Ruta de evaluación y demo: matriz de confusión, errores comentados, guardado con metadatos, recarga estricta e inferencia Top-3 | sección 10 de `05_flores_final.ipynb` |
 
-Con `'base'` entrena solo la capa `fc` durante 5 épocas y deja funcionando toda la tubería
-de evaluación. Con `'final'` descongela `layer4` (8,446,054 parámetros entrenables frente a
-52,326) y usa 10 épocas, que es la configuración que ganó en la comparación de validación.
-El código de las celdas no cambia entre ambos casos: cambia el punto de partida del modelo.
+## Configuración final
 
-## Cómo ejecutarlo
+La comparación se hizo solo con validación, y ganó `E5_LAYER4`: ResNet18 con `layer4` y `fc`
+entrenables, lote 32, tasa de aprendizaje 0.001 y **5 épocas**. Deja 8,446,054 parámetros
+entrenables de 11,228,838.
 
-1. Abrir `05_flores.ipynb` en Colab con GPU, o en local con `torch`, `torchvision`,
-   `scikit-learn` y `matplotlib`.
-2. Ejecutar todo con `CONFIG = 'base'`. La primera vez descarga Oxford Flowers 102 (unos
-   345 MB) y los pesos de ResNet18.
-3. Cuando Persona 3 cierre los experimentos, cambiar `CONFIG` a `'final'` y volver a correr
-   solo la sección 9. Los números, la matriz y las capturas se actualizan solos.
-4. Si ya existe `evaluacion_<config>.pth`, la sección 9 carga el checkpoint y no reentrena.
+Conviene decirlo porque hubo una divergencia: una versión anterior del README de evaluación
+describía la configuración final como `layer4` con 10 épocas. Los registros de
+`modelo/resultados_experimentos.json` muestran que el ganador por validación es E5 con 5
+épocas (91.9608 %); las 10 épocas corresponden a E4, que mantiene la red congelada y llega a
+83.4314 %. El notebook final usa E5.
 
-## Resultados de la corrida base (registrada)
+## Resultados
 
-Entorno: CPU, PyTorch 2.14.0+cu130, torchvision 0.29.0, scikit-learn 1.9.1. Sin GPU
-disponible en la máquina donde se ejecutó.
+Los dos entornos se reportan por separado porque no son la misma corrida y no deben
+promediarse.
+
+**GPU (Tesla T4, Colab) — modelo final E5, evaluación única sobre prueba**
+
+| Medida | Resultado |
+|---|---:|
+| Exactitud de validación | 91.9608 % |
+| Prueba Top-1 | 88.8600 % (5,464 de 6,149) |
+| Prueba Top-3 | 94.9748 % |
+| Pérdida en prueba | 0.5492 |
+| Parámetros entrenables | 8,446,054 de 11,228,838 |
+
+**CPU (local, PyTorch 2.14.0) — corrida base con `fc` solamente, usada para validar la tubería**
 
 | Medida | Resultado |
 |---|---:|
@@ -41,35 +52,65 @@ disponible en la máquina donde se ejecutó.
 | Prueba Top-3 | 87.67 % |
 | Pérdida en prueba | 1.5577 |
 | Parámetros entrenables | 52,326 de 11,228,838 |
-| Tiempo de entrenamiento | ~16 min (5 épocas, CPU) |
 
-Confusiones más frecuentes: Flor 74 → Flor 96 (28 casos), Flor 51 → Flor 76 (26) y
-Flor 51 → Flor 72 (22). La clase 51 tiene 238 imágenes de prueba y su recall es de 0.46,
-así que concentra buena parte del error.
+## Los seis experimentos
 
-La recarga del modelo guardado reproduce exactamente las predicciones del modelo en memoria
-(`Predicciones idénticas tras recargar: True`), y las cinco imágenes de la demo aparecen con
-su Top-3 y su confianza. La confianza de esas cinco va de 0.17 a 0.91, lo que ya muestra que
-el modelo no está calibrado de forma uniforme.
+Todos con semilla 42 salvo donde se indica, y todos evaluados en validación antes de tocar
+prueba.
 
-## Archivos que genera
+| Id | Cambio | Val. exactitud | Val. pérdida | Segundos | Entrenables |
+|---|---|---:|---:|---:|---:|
+| B0 | Base: solo `fc`, 5 épocas | 75.6863 % | 1.7359 | 65.29 | 52,326 |
+| E1 | Semilla 7 | 76.3725 % | 1.7016 | 62.91 | 52,326 |
+| E2 | Lote 64 | 73.4314 % | 2.2156 | 60.63 | 52,326 |
+| E3 | Tasa 0.0001 | 18.3333 % | 4.1334 | 63.62 | 52,326 |
+| E4 | 10 épocas | 83.4314 % | 1.1090 | 128.24 | 52,326 |
+| E5 | `layer4` descongelado | 91.9608 % | 0.4631 | 63.84 | 8,446,054 |
 
-- `evaluacion_base.pth` / `evaluacion_final.pth`: pesos, historial y configuración.
-- `modelo_demo_base.pth` / `modelo_demo_final.pth`: pesos con clases, transformación y métricas.
-- `modelo_entrenado.pth`: lo guarda la sección 7 de la plantilla.
+Regla de selección aplicada: mayor exactitud de validación, luego menor pérdida de validación,
+luego menos parámetros entrenables.
 
-Los `.pth` están en `.gitignore` porque pesan unos 45 MB cada uno; se regeneran al ejecutar.
+## Cómo ejecutarlo
 
-## Qué queda pendiente
+1. Abrir `05_flores_final.ipynb` en Colab con GPU, o en local con `torch`, `torchvision`,
+   `scikit-learn` y `matplotlib`.
+2. Ejecutar en orden. La primera vez descarga Oxford Flowers 102 (unos 345 MB) y los pesos
+   de ResNet18.
+3. La sección 9 lee `modelo/resultados_experimentos.json` si está presente; si no, muestra la
+   tabla registrada en el propio notebook.
+4. La sección 10 tiene un interruptor `CONFIG = 'base' | 'final'`. Con `'base'` entrena solo
+   `fc` y sirve para probar la tubería rápido; con `'final'` reproduce E5.
+5. Si existe el checkpoint de la configuración elegida, la sección 10 lo carga y no reentrena.
 
-- Cambiar `CONFIG` a `'final'` y volver a correr la sección 9 cuando Persona 3 elija.
-- Rellenar la segunda fila de la tabla de la sección 10 con esas cifras.
-- Repetir la demo con imágenes propias si el profesor pide una entrada externa al dataset.
+## Archivos
+
+- `05_flores_final.ipynb`: notebook integrado y ejecutado (entrega principal).
+- `05_flores_datos.ipynb`: evidencia de la rama `Datos`, con la exploración y las pruebas de
+  semilla y lote en CPU.
+- `notebooks/Arquitectura_ResNet18_GPU_ejecutado.ipynb`: salidas GPU conservadas.
+- `notebooks/Arquitectura_ResNet18_GPU.ipynb`: código sin salidas para reproducir.
+- `notebooks/Arquitectura_ResNet18_CPU_historico.ipynb`: registro CPU histórico, con métricas
+  distintas de las del modelo final.
+- `modelo/modelo_entrenado.pth`: checkpoint final con `state_dict` y metadatos.
+- `modelo/metadata.json`: arquitectura, clases, transformación, configuración y versiones.
+- `modelo/resultados_experimentos.json`: historiales de las seis configuraciones.
+- `evidencias/`: curvas, matriz de confusión, tres errores, métricas por clase y resumen GPU.
+- `docs/`: informe de arquitectura en PDF y DOCX, y verificación del entorno GPU.
+- `requirements_registrados.txt`: versiones por entorno.
 
 ## Límites que conviene decir en voz alta
 
-El modelo solo elige entre las 102 clases del dataset; una flor de otra especie recibirá
+El modelo solo elige entre las 102 clases del dataset: una flor de otra especie recibirá
 alguna de esas etiquetas, a veces con confianza alta. Las probabilidades de softmax no
-acreditan calibración y Top-3 alto no significa que el modelo "dude" donde debería. La
-evaluación con 6,149 imágenes es la que sostiene las conclusiones; cinco predicciones de
-demo no sustituyen esa medición.
+acreditan calibración, y un Top-3 alto no significa que el modelo dude donde debería. La
+evaluación con 6,149 imágenes es la que sostiene las conclusiones; cinco predicciones de demo
+no sustituyen esa medición.
+
+Las diferencias de semilla rondan 0.69 puntos en GPU y 1.57 en CPU, así que mejoras menores a
+ese orden no deben presentarse como hallazgos.
+
+## Referencias
+
+- https://pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html
+- https://arxiv.org/abs/1512.03385
+- https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
