@@ -119,7 +119,8 @@ que sostiene la entrega es la de la sección 10.
   distintas de las del modelo final.
 - `modelo/modelo_entrenado.pth`: checkpoint final con `state_dict` y metadatos.
 - `modelo/experimentos/`: los cinco checkpoints de Emiliano (BASE, EXP-01, EXP-02, EXP-04 y
-  `modelo_final.pth` = EXP-03), con su configuración y métricas, versionados con Git LFS.
+  `modelo_final.pth` = EXP-03), con su configuración y métricas. Van como archivos normales,
+  no con LFS: el cliente de LFS de este equipo no resuelve `github.com` y el push fallaba.
 - `modelo/metadata.json`: arquitectura, clases, transformación, configuración y versiones.
 - `modelo/resultados_experimentos.json`: historiales de las seis configuraciones.
 - `evidencias/`: curvas, matriz de confusión, tres errores, métricas por clase y resumen GPU.

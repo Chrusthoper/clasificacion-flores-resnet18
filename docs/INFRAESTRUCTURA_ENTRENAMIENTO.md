@@ -77,9 +77,11 @@ reconstruir ResNet18, sustituir `fc` por `Linear(512, 102)` y respetar el orden 
 
 Los checkpoints llegaron como carpetas extraídas (`BASE.pth/BASE/data/...`), que es el
 contenido interno del zip de PyTorch. Los volví a empaquetar como `.pth` para que
-`torch.load` funcione y para versionarlos con Git LFS. Los tensores y los metadatos son
-idénticos a los de las carpetas; el contenedor zip no. Huellas de los archivos publicados
-(SHA-256, primeros 12 caracteres):
+`torch.load` funcione. Los tensores y los metadatos son idénticos a los de las carpetas; el
+contenedor zip no. Quedan como archivos normales y no con Git LFS porque el cliente de LFS de
+este equipo no resuelve `github.com` (su resolver falla en la ruta IPv6) y el push se aborta;
+cada archivo pesa 45 MB, por debajo del límite de 100 MB por archivo de GitHub. Huellas de los
+archivos publicados (SHA-256, primeros 12 caracteres):
 
 | Archivo | SHA-256 |
 |---|---|
