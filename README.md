@@ -48,7 +48,7 @@ promediarse.
 
 | Medida | Resultado |
 |---|---:|
-| Exactitud de validación (época 5) | 78.33 % |
+| Exactitud de validación (época 5) | 78.2 % |
 | Prueba Top-1 | 75.49 % (4,642 de 6,149) |
 | Prueba Top-3 | 87.67 % |
 | Pérdida en prueba | 1.5577 |
