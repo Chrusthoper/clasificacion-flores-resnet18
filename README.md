@@ -13,7 +13,8 @@ nuevas: la comparación de experimentos y la evaluación final.
 |---|---|---|---|
 | `Datos` | Laura (1) | Exploración del dataset, respuestas de las secciones 1 y 2, pruebas de semilla y tamaño de lote en CPU | `05_flores_datos.ipynb` |
 | `Arquitectura` | Migue (2) | Auditoría de la red, seis configuraciones entrenadas en GPU, selección por validación, evaluación final, matriz, métricas por clase y checkpoint | `notebooks/`, `modelo/`, `evidencias/`, `docs/` |
-| `Entrenamiento_y_experimentos` | Emi (3) | No tenía commits propios: apuntaba al mismo commit base que `main`. Su contenido (la comparación de experimentos) vive en la rama `Arquitectura` y se integra en la sección 9 del notebook final | sección 9 de `05_flores_final.ipynb` |
+| `Entrenamiento_y_experimentos` | — | Apuntaba al mismo commit base que `main`, sin commits propios. El trabajo real de experimentos de Emi está en la rama `Emiliano_VL` | ver fila siguiente |
+| `Emiliano_VL` | Emi (3) | Infraestructura de entrenamiento y experimentos: notebook de entorno y cinco checkpoints con su configuración y métricas, ejecutados en GPU de Apple (mps) | `05_flores_experimentos.ipynb`, `modelo/experimentos/`, `docs/INFRAESTRUCTURA_ENTRENAMIENTO.md` |
 | `Evaluación_demostración` | Chris (4) | Ruta de evaluación y demo: matriz de confusión, errores comentados, guardado con metadatos, recarga estricta e inferencia Top-3 | sección 10 de `05_flores_final.ipynb` |
 
 ## Configuración final
@@ -70,6 +71,29 @@ prueba.
 Regla de selección aplicada: mayor exactitud de validación, luego menor pérdida de validación,
 luego menos parámetros entrenables.
 
+## Infraestructura y réplica en Apple Silicon (Emiliano)
+
+La rama `Emiliano_VL` aporta un tercer entorno: los cinco checkpoints de
+`modelo/experimentos/` se entrenaron en `mps` (GPU de Apple Silicon) y cada uno guarda su
+propia configuración y su mejor época. No se promedian con la T4 ni con la CPU.
+
+| Experimento | Semilla | Épocas | Tasa | Fine-tuning | Val. exactitud | Val. pérdida |
+|---|---:|---:|---:|---|---:|---:|
+| BASE | 42 | 5 | 0.001 | No | 75.69 % | 1.7359 |
+| EXP-01 | 42 | 10 | 0.001 | No | 83.43 % | 1.1091 |
+| EXP-02 | 42 | 5 | 0.0005 | No | 68.53 % | 2.5648 |
+| EXP-03 (`modelo_final.pth`) | 42 | 5 | 0.001 | Sí (`layer4`) | 92.16 % | 0.4620 |
+| EXP-04 | 7 | 5 | 0.001 | No | 76.37 % | 1.7016 |
+
+Su configuración final coincide en dirección con E5: `layer4` descongelado y 5 épocas. La
+verificación tensor por tensor confirma que EXP-01, EXP-02 y EXP-04 solo cambiaron `fc`
+(2 de 122 tensores), mientras EXP-03 cambió `fc` y `layer4` (32 de 122). El detalle completo,
+las huellas de los archivos y lo que queda pendiente de su parte están en
+`docs/INFRAESTRUCTURA_ENTRENAMIENTO.md`.
+
+Sus checkpoints no incluyen evaluación sobre prueba, solo validación; la medición de prueba
+que sostiene la entrega es la de la sección 10.
+
 ## Cómo ejecutarlo
 
 1. Abrir `05_flores_final.ipynb` en Colab con GPU, o en local con `torch`, `torchvision`,
@@ -85,6 +109,8 @@ luego menos parámetros entrenables.
 ## Archivos
 
 - `05_flores_final.ipynb`: notebook integrado y ejecutado (entrega principal).
+- `05_flores_experimentos.ipynb`: notebook de Emiliano con el entorno de entrenamiento
+  preparado (sus respuestas quedan pendientes).
 - `05_flores_datos.ipynb`: evidencia de la rama `Datos`, con la exploración y las pruebas de
   semilla y lote en CPU.
 - `notebooks/Arquitectura_ResNet18_GPU_ejecutado.ipynb`: salidas GPU conservadas.
@@ -92,6 +118,8 @@ luego menos parámetros entrenables.
 - `notebooks/Arquitectura_ResNet18_CPU_historico.ipynb`: registro CPU histórico, con métricas
   distintas de las del modelo final.
 - `modelo/modelo_entrenado.pth`: checkpoint final con `state_dict` y metadatos.
+- `modelo/experimentos/`: los cinco checkpoints de Emiliano (BASE, EXP-01, EXP-02, EXP-04 y
+  `modelo_final.pth` = EXP-03), con su configuración y métricas, versionados con Git LFS.
 - `modelo/metadata.json`: arquitectura, clases, transformación, configuración y versiones.
 - `modelo/resultados_experimentos.json`: historiales de las seis configuraciones.
 - `evidencias/`: curvas, matriz de confusión, tres errores, métricas por clase y resumen GPU.
